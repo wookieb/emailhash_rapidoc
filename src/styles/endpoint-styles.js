@@ -1,4 +1,5 @@
-import { css } from 'lit-element';
+// import { css } from 'lit-element';
+import { css } from 'lit';
 
 export default css`
 .only-large-screen { display:none; }

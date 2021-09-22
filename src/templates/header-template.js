@@ -1,4 +1,5 @@
-import { html } from 'lit-element';
+// import { html } from 'lit-element';
+import { html } from 'lit';
 import logoTemplate from '~/templates/logo-template';
 
 /* eslint-disable indent */

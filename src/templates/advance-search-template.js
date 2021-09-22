@@ -1,4 +1,5 @@
-import { html } from 'lit-element';
+// import { html } from 'lit-element';
+import { html } from 'lit';
 import '~/components/dialog-box';
 
 /* eslint-disable indent */

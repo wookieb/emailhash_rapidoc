@@ -1,4 +1,5 @@
-import { LitElement, html, css } from 'lit-element';
+// import { LitElement, html, css } from 'lit-element';
+import { LitElement, html, css } from 'lit';
 
 export default class TagInput extends LitElement {
   /* eslint-disable indent */

@@ -1,4 +1,5 @@
-import { css, LitElement, unsafeCSS } from 'lit-element';
+// import { css, LitElement, unsafeCSS } from 'lit-element';
+import { css, LitElement, unsafeCSS } from 'lit';
 import marked from 'marked';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-css';

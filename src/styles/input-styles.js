@@ -1,4 +1,5 @@
-import { css } from 'lit-element';
+// import { css } from 'lit-element';
+import { css } from 'lit';
 
 /* eslint-disable max-len */
 export default css`

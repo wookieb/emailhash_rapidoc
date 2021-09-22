@@ -1,4 +1,6 @@
-import { html } from 'lit-element';
+// import { html } from 'lit-element';
+import { html } from 'lit';
+
 import marked from 'marked';
 import { pathIsInSearch } from '~/utils/common-utils';
 

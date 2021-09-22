@@ -1,7 +1,8 @@
-import { html } from 'lit-element';
+// import { LitElement, html, css } from 'lit-element';
+// import { unsafeHTML } from 'lit-html/directives/unsafe-html';
+import { html } from 'lit';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js'; // eslint-disable-line import/extensions
 import marked from 'marked';
-import { unsafeHTML } from 'lit-html/directives/unsafe-html';
-
 // Templates
 import overviewTemplate from '~/templates/overview-template';
 import headerTemplate from '~/templates/header-template';
