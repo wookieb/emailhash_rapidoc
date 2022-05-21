@@ -34784,7 +34784,7 @@ class RapiDoc extends lit_element_s {
           display:flex;
         }
         .section-gap { 
-          padding: 0 0 0 24px; 
+          padding: 0; 
         }
         .section-gap--focused-mode {
           padding: 24px 8px; 
@@ -35075,7 +35075,8 @@ class RapiDoc extends lit_element_s {
 
   render() {
     // return render(mainBodyTemplate(this), this.shadowRoot, { eventContext: this });
-    const cssLinkEl = document.querySelector(`link[href*="${this.cssFile}"]`); // adding custom style for RapiDoc
+    const cssLinkEl = document.querySelector(`link[href*="${this.cssFile}"]`);
+    console.log(cssLinkEl, this.cssFile, this.shadowRoot); // adding custom style for RapiDoc
 
     if (cssLinkEl) {
       this.shadowRoot.appendChild(cssLinkEl.cloneNode());
@@ -42393,7 +42394,7 @@ Prism.languages.js = Prism.languages.javascript;
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("ccc2cfcc281c32c1d0db")
+/******/ 		__webpack_require__.h = () => ("886706ca56d0a83d80c9")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */

@@ -39,95 +39,286 @@ export default class RapiDoc extends LitElement {
     };
     this.showSummaryWhenCollapsed = true;
     this.isIntersectionObserverActive = true;
-    this.intersectionObserver = new IntersectionObserver((entries) => { this.onIntersect(entries); }, intersectionObserverOptions);
+    this.intersectionObserver = new IntersectionObserver((entries) => {
+      this.onIntersect(entries);
+    }, intersectionObserverOptions);
   }
 
   static get properties() {
     return {
       // Heading
-      headingText: { type: String, attribute: 'heading-text' },
-      gotoPath: { type: String, attribute: 'goto-path' },
+      headingText: {
+        type: String,
+        attribute: 'heading-text'
+      },
+      gotoPath: {
+        type: String,
+        attribute: 'goto-path'
+      },
 
       // Spec
-      updateRoute: { type: String, attribute: 'update-route' },
-      routePrefix: { type: String, attribute: 'route-prefix' },
-      specUrl: { type: String, attribute: 'spec-url' },
-      sortTags: { type: String, attribute: 'sort-tags' },
-      generateMissingTags: { type: String, attribute: 'generate-missing-tags' },
-      sortEndpointsBy: { type: String, attribute: 'sort-endpoints-by' },
-      specFile: { type: String, attribute: false },
+      updateRoute: {
+        type: String,
+        attribute: 'update-route'
+      },
+      routePrefix: {
+        type: String,
+        attribute: 'route-prefix'
+      },
+      specUrl: {
+        type: String,
+        attribute: 'spec-url'
+      },
+      sortTags: {
+        type: String,
+        attribute: 'sort-tags'
+      },
+      generateMissingTags: {
+        type: String,
+        attribute: 'generate-missing-tags'
+      },
+      sortEndpointsBy: {
+        type: String,
+        attribute: 'sort-endpoints-by'
+      },
+      specFile: {
+        type: String,
+        attribute: false
+      },
 
       // UI Layouts
       layout: { type: String },
-      renderStyle: { type: String, attribute: 'render-style' },
-      defaultSchemaTab: { type: String, attribute: 'default-schema-tab' },
-      responseAreaHeight: { type: String, attribute: 'response-area-height' },
-      fillRequestFieldsWithExample: { type: String, attribute: 'fill-request-fields-with-example' },
-      useSummaryToListExamples: { type: String, attribute: 'use-summary-to-list-example' },
-      persistAuth: { type: String, attribute: 'persist-auth' },
-      onNavTagClick: { type: String, attribute: 'on-nav-tag-click' },
+      renderStyle: {
+        type: String,
+        attribute: 'render-style'
+      },
+      defaultSchemaTab: {
+        type: String,
+        attribute: 'default-schema-tab'
+      },
+      responseAreaHeight: {
+        type: String,
+        attribute: 'response-area-height'
+      },
+      fillRequestFieldsWithExample: {
+        type: String,
+        attribute: 'fill-request-fields-with-example'
+      },
+      useSummaryToListExamples: {
+        type: String,
+        attribute: 'use-summary-to-list-example'
+      },
+      persistAuth: {
+        type: String,
+        attribute: 'persist-auth'
+      },
+      onNavTagClick: {
+        type: String,
+        attribute: 'on-nav-tag-click'
+      },
 
       // Schema Styles
-      schemaStyle: { type: String, attribute: 'schema-style' },
-      schemaExpandLevel: { type: Number, attribute: 'schema-expand-level' },
-      schemaDescriptionExpanded: { type: String, attribute: 'schema-description-expanded' },
-      schemaHideReadOnly: { type: String, attribute: 'schema-hide-read-only' },
-      schemaHideWriteOnly: { type: String, attribute: 'schema-hide-write-only' },
+      schemaStyle: {
+        type: String,
+        attribute: 'schema-style'
+      },
+      schemaExpandLevel: {
+        type: Number,
+        attribute: 'schema-expand-level'
+      },
+      schemaDescriptionExpanded: {
+        type: String,
+        attribute: 'schema-description-expanded'
+      },
+      schemaHideReadOnly: {
+        type: String,
+        attribute: 'schema-hide-read-only'
+      },
+      schemaHideWriteOnly: {
+        type: String,
+        attribute: 'schema-hide-write-only'
+      },
 
       // API Server
-      apiKeyName: { type: String, attribute: 'api-key-name' },
-      apiKeyLocation: { type: String, attribute: 'api-key-location' },
-      apiKeyValue: { type: String, attribute: 'api-key-value' },
-      defaultApiServerUrl: { type: String, attribute: 'default-api-server' },
-      serverUrl: { type: String, attribute: 'server-url' },
-      oauthReceiver: { type: String, attribute: 'oauth-receiver' },
+      apiKeyName: {
+        type: String,
+        attribute: 'api-key-name'
+      },
+      apiKeyLocation: {
+        type: String,
+        attribute: 'api-key-location'
+      },
+      apiKeyValue: {
+        type: String,
+        attribute: 'api-key-value'
+      },
+      defaultApiServerUrl: {
+        type: String,
+        attribute: 'default-api-server'
+      },
+      serverUrl: {
+        type: String,
+        attribute: 'server-url'
+      },
+      oauthReceiver: {
+        type: String,
+        attribute: 'oauth-receiver'
+      },
 
       // Hide/Show Sections & Enable Disable actions
-      showHeader: { type: String, attribute: 'show-header' },
-      showSideNav: { type: String, attribute: 'show-side-nav' },
-      showInfo: { type: String, attribute: 'show-info' },
-      allowAuthentication: { type: String, attribute: 'allow-authentication' },
-      allowTry: { type: String, attribute: 'allow-try' },
-      allowSpecUrlLoad: { type: String, attribute: 'allow-spec-url-load' },
-      allowSpecFileLoad: { type: String, attribute: 'allow-spec-file-load' },
-      allowSpecFileDownload: { type: String, attribute: 'allow-spec-file-download' },
-      allowSearch: { type: String, attribute: 'allow-search' },
-      allowAdvancedSearch: { type: String, attribute: 'allow-advanced-search' },
-      allowServerSelection: { type: String, attribute: 'allow-server-selection' },
-      allowSchemaDescriptionExpandToggle: { type: String, attribute: 'allow-schema-description-expand-toggle' },
-      showComponents: { type: String, attribute: 'show-components' },
-      pageDirection: { type: String, attribute: 'page-direction' },
+      showHeader: {
+        type: String,
+        attribute: 'show-header'
+      },
+      showSideNav: {
+        type: String,
+        attribute: 'show-side-nav'
+      },
+      showInfo: {
+        type: String,
+        attribute: 'show-info'
+      },
+      allowAuthentication: {
+        type: String,
+        attribute: 'allow-authentication'
+      },
+      allowTry: {
+        type: String,
+        attribute: 'allow-try'
+      },
+      allowSpecUrlLoad: {
+        type: String,
+        attribute: 'allow-spec-url-load'
+      },
+      allowSpecFileLoad: {
+        type: String,
+        attribute: 'allow-spec-file-load'
+      },
+      allowSpecFileDownload: {
+        type: String,
+        attribute: 'allow-spec-file-download'
+      },
+      allowSearch: {
+        type: String,
+        attribute: 'allow-search'
+      },
+      allowAdvancedSearch: {
+        type: String,
+        attribute: 'allow-advanced-search'
+      },
+      allowServerSelection: {
+        type: String,
+        attribute: 'allow-server-selection'
+      },
+      allowSchemaDescriptionExpandToggle: {
+        type: String,
+        attribute: 'allow-schema-description-expand-toggle'
+      },
+      showComponents: {
+        type: String,
+        attribute: 'show-components'
+      },
+      pageDirection: {
+        type: String,
+        attribute: 'page-direction'
+      },
 
       // Main Colors and Font
       theme: { type: String },
-      bgColor: { type: String, attribute: 'bg-color' },
-      textColor: { type: String, attribute: 'text-color' },
-      headerColor: { type: String, attribute: 'header-color' },
-      primaryColor: { type: String, attribute: 'primary-color' },
-      fontSize: { type: String, attribute: 'font-size' },
-      regularFont: { type: String, attribute: 'regular-font' },
-      monoFont: { type: String, attribute: 'mono-font' },
-      loadFonts: { type: String, attribute: 'load-fonts' },
-      cssFile: { type: String, attribute: 'css-file' },
-      cssClasses: { type: String, attribute: 'css-classes' },
+      bgColor: {
+        type: String,
+        attribute: 'bg-color'
+      },
+      textColor: {
+        type: String,
+        attribute: 'text-color'
+      },
+      headerColor: {
+        type: String,
+        attribute: 'header-color'
+      },
+      primaryColor: {
+        type: String,
+        attribute: 'primary-color'
+      },
+      fontSize: {
+        type: String,
+        attribute: 'font-size'
+      },
+      regularFont: {
+        type: String,
+        attribute: 'regular-font'
+      },
+      monoFont: {
+        type: String,
+        attribute: 'mono-font'
+      },
+      loadFonts: {
+        type: String,
+        attribute: 'load-fonts'
+      },
+      cssFile: {
+        type: String,
+        attribute: 'css-file'
+      },
+      cssClasses: {
+        type: String,
+        attribute: 'css-classes'
+      },
 
       // Nav Bar Colors
-      navBgColor: { type: String, attribute: 'nav-bg-color' },
-      navTextColor: { type: String, attribute: 'nav-text-color' },
-      navHoverBgColor: { type: String, attribute: 'nav-hover-bg-color' },
-      navHoverTextColor: { type: String, attribute: 'nav-hover-text-color' },
-      navAccentColor: { type: String, attribute: 'nav-accent-color' },
-      navItemSpacing: { type: String, attribute: 'nav-item-spacing' },
-      showMethodInNavBar: { type: String, attribute: 'show-method-in-nav-bar' },
-      usePathInNavBar: { type: String, attribute: 'use-path-in-nav-bar' },
-      infoDescriptionHeadingsInNavBar: { type: String, attribute: 'info-description-headings-in-navbar' },
+      navBgColor: {
+        type: String,
+        attribute: 'nav-bg-color'
+      },
+      navTextColor: {
+        type: String,
+        attribute: 'nav-text-color'
+      },
+      navHoverBgColor: {
+        type: String,
+        attribute: 'nav-hover-bg-color'
+      },
+      navHoverTextColor: {
+        type: String,
+        attribute: 'nav-hover-text-color'
+      },
+      navAccentColor: {
+        type: String,
+        attribute: 'nav-accent-color'
+      },
+      navItemSpacing: {
+        type: String,
+        attribute: 'nav-item-spacing'
+      },
+      showMethodInNavBar: {
+        type: String,
+        attribute: 'show-method-in-nav-bar'
+      },
+      usePathInNavBar: {
+        type: String,
+        attribute: 'use-path-in-nav-bar'
+      },
+      infoDescriptionHeadingsInNavBar: {
+        type: String,
+        attribute: 'info-description-headings-in-navbar'
+      },
 
       // Fetch Options
-      fetchCredentials: { type: String, attribute: 'fetch-credentials' },
+      fetchCredentials: {
+        type: String,
+        attribute: 'fetch-credentials'
+      },
 
       // Filters
-      matchPaths: { type: String, attribute: 'match-paths' },
-      matchType: { type: String, attribute: 'match-type' },
+      matchPaths: {
+        type: String,
+        attribute: 'match-paths'
+      },
+      matchType: {
+        type: String,
+        attribute: 'match-type'
+      },
 
       // Internal Properties
       loading: { type: Boolean }, // indicates spec is being loaded
@@ -367,7 +558,7 @@ export default class RapiDoc extends LitElement {
           display:flex;
         }
         .section-gap { 
-          padding: 0 0 0 24px; 
+          padding: 0; 
         }
         .section-gap--focused-mode {
           padding: 24px 8px; 
@@ -409,10 +600,18 @@ export default class RapiDoc extends LitElement {
         parent.style.height = '100vh';
       }
       if (parent.tagName === 'BODY') {
-        if (!parent.style.marginTop) { parent.style.marginTop = '0'; }
-        if (!parent.style.marginRight) { parent.style.marginRight = '0'; }
-        if (!parent.style.marginBottom) { parent.style.marginBottom = '0'; }
-        if (!parent.style.marginLeft) { parent.style.marginLeft = '0'; }
+        if (!parent.style.marginTop) {
+          parent.style.marginTop = '0';
+        }
+        if (!parent.style.marginRight) {
+          parent.style.marginRight = '0';
+        }
+        if (!parent.style.marginBottom) {
+          parent.style.marginBottom = '0';
+        }
+        if (!parent.style.marginLeft) {
+          parent.style.marginLeft = '0';
+        }
       }
     }
 
@@ -425,22 +624,34 @@ export default class RapiDoc extends LitElement {
       };
       const fontWeight300 = new FontFace(
         'Open Sans',
-        "url(https://fonts.gstatic.com/s/opensans/v18/mem5YaGs126MiZpBA-UN_r8OUuhpKKSTjw.woff2) format('woff2')",
+        'url(https://fonts.gstatic.com/s/opensans/v18/mem5YaGs126MiZpBA-UN_r8OUuhpKKSTjw.woff2) format(\'woff2\')',
         fontDescriptor,
       );
       fontDescriptor.weight = '600';
       const fontWeight600 = new FontFace(
         'Open Sans',
-        "url(https://fonts.gstatic.com/s/opensans/v18/mem5YaGs126MiZpBA-UNirkOUuhpKKSTjw.woff2) format('woff2')",
+        'url(https://fonts.gstatic.com/s/opensans/v18/mem5YaGs126MiZpBA-UNirkOUuhpKKSTjw.woff2) format(\'woff2\')',
         fontDescriptor,
       );
-      fontWeight300.load().then((font) => { document.fonts.add(font); });
-      fontWeight600.load().then((font) => { document.fonts.add(font); });
+      fontWeight300.load()
+        .then((font) => {
+          document.fonts.add(font);
+        });
+      fontWeight600.load()
+        .then((font) => {
+          document.fonts.add(font);
+        });
     }
 
-    if (!this.layout || !'row, column,'.includes(`${this.layout},`)) { this.layout = 'row'; }
-    if (!this.renderStyle || !'read, view, focused,'.includes(`${this.renderStyle},`)) { this.renderStyle = 'read'; }
-    if (!this.schemaStyle || !'tree, table,'.includes(`${this.schemaStyle},`)) { this.schemaStyle = 'tree'; }
+    if (!this.layout || !'row, column,'.includes(`${this.layout},`)) {
+      this.layout = 'row';
+    }
+    if (!this.renderStyle || !'read, view, focused,'.includes(`${this.renderStyle},`)) {
+      this.renderStyle = 'read';
+    }
+    if (!this.schemaStyle || !'tree, table,'.includes(`${this.schemaStyle},`)) {
+      this.schemaStyle = 'tree';
+    }
     if (!this.theme || !'light, dark,'.includes(`${this.theme},`)) {
       this.theme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
     }
@@ -449,8 +660,12 @@ export default class RapiDoc extends LitElement {
     } else if (this.defaultSchemaTab === 'model') {
       this.defaultSchemaTab = 'schema';
     }
-    if (!this.schemaExpandLevel || this.schemaExpandLevel < 1) { this.schemaExpandLevel = 99999; }
-    if (!this.schemaDescriptionExpanded || !'true, false,'.includes(`${this.schemaDescriptionExpanded},`)) { this.schemaDescriptionExpanded = 'false'; }
+    if (!this.schemaExpandLevel || this.schemaExpandLevel < 1) {
+      this.schemaExpandLevel = 99999;
+    }
+    if (!this.schemaDescriptionExpanded || !'true, false,'.includes(`${this.schemaDescriptionExpanded},`)) {
+      this.schemaDescriptionExpanded = 'false';
+    }
     const writeMethodsWithBody = ['post', 'put', 'patch'];
     if (!this.schemaHideReadOnly) {
       this.schemaHideReadOnly = writeMethodsWithBody;
@@ -462,48 +677,112 @@ export default class RapiDoc extends LitElement {
     }
     this.schemaHideReadOnly += ['get', 'head', 'delete', 'options'];
     this.schemaHideWriteOnly = this.schemaHideWriteOnly !== 'never';
-    if (!this.fillRequestFieldsWithExample || !'true, false,'.includes(`${this.fillRequestFieldsWithExample},`)) { this.fillRequestFieldsWithExample = 'true'; }
-    if (!this.useSummaryToListExamples || !'true, false,'.includes(`${this.useSummaryToListExamples},`)) { this.useSummaryToListExamples = 'false'; }
-    if (!this.persistAuth || !'true, false,'.includes(`${this.persistAuth},`)) { this.persistAuth = 'false'; }
-    if (!this.onNavTagClick || !'expand-collapse, show-description,'.includes(`${this.onNavTagClick},`)) { this.onNavTagClick = 'expand-collapse'; }
+    if (!this.fillRequestFieldsWithExample || !'true, false,'.includes(`${this.fillRequestFieldsWithExample},`)) {
+      this.fillRequestFieldsWithExample = 'true';
+    }
+    if (!this.useSummaryToListExamples || !'true, false,'.includes(`${this.useSummaryToListExamples},`)) {
+      this.useSummaryToListExamples = 'false';
+    }
+    if (!this.persistAuth || !'true, false,'.includes(`${this.persistAuth},`)) {
+      this.persistAuth = 'false';
+    }
+    if (!this.onNavTagClick || !'expand-collapse, show-description,'.includes(`${this.onNavTagClick},`)) {
+      this.onNavTagClick = 'expand-collapse';
+    }
     if (!this.responseAreaHeight) {
       this.responseAreaHeight = '300px';
     }
 
-    if (!this.allowSearch || !'true, false,'.includes(`${this.allowSearch},`)) { this.allowSearch = 'true'; }
-    if (!this.allowAdvancedSearch || !'true, false,'.includes(`${this.allowAdvancedSearch},`)) { this.allowAdvancedSearch = 'true'; }
+    if (!this.allowSearch || !'true, false,'.includes(`${this.allowSearch},`)) {
+      this.allowSearch = 'true';
+    }
+    if (!this.allowAdvancedSearch || !'true, false,'.includes(`${this.allowAdvancedSearch},`)) {
+      this.allowAdvancedSearch = 'true';
+    }
 
-    if (!this.allowTry || !'true, false,'.includes(`${this.allowTry},`)) { this.allowTry = 'true'; }
-    if (!this.apiKeyValue) { this.apiKeyValue = '-'; }
-    if (!this.apiKeyLocation) { this.apiKeyLocation = 'header'; }
-    if (!this.apiKeyName) { this.apiKeyName = ''; }
+    if (!this.allowTry || !'true, false,'.includes(`${this.allowTry},`)) {
+      this.allowTry = 'true';
+    }
+    if (!this.apiKeyValue) {
+      this.apiKeyValue = '-';
+    }
+    if (!this.apiKeyLocation) {
+      this.apiKeyLocation = 'header';
+    }
+    if (!this.apiKeyName) {
+      this.apiKeyName = '';
+    }
 
-    if (!this.oauthReceiver) { this.oauthReceiver = 'oauth-receiver.html'; }
-    if (!this.updateRoute || !'true, false,'.includes(`${this.updateRoute},`)) { this.updateRoute = 'true'; }
-    if (!this.routePrefix) { this.routePrefix = '#'; }
-    if (!this.sortTags || !'true, false,'.includes(`${this.sortTags},`)) { this.sortTags = 'false'; }
-    if (!this.generateMissingTags || !'true, false,'.includes(`${this.generateMissingTags},`)) { this.generateMissingTags = 'false'; }
-    if (!this.sortEndpointsBy || !'method, path, summary, none,'.includes(`${this.sortEndpointsBy},`)) { this.sortEndpointsBy = 'path'; }
-    if (!this.navItemSpacing || !'compact, relaxed, default,'.includes(`${this.navItemSpacing},`)) { this.navItemSpacing = 'default'; }
-    if (!this.showMethodInNavBar || !'false, as-plain-text, as-colored-text, as-colored-block,'.includes(`${this.showMethodInNavBar},`)) { this.showMethodInNavBar = 'false'; }
-    if (!this.usePathInNavBar || !'true, false,'.includes(`${this.usePathInNavBar},`)) { this.usePathInNavBar = 'false'; }
-    if (!this.fontSize || !'default, large, largest,'.includes(`${this.fontSize},`)) { this.fontSize = 'default'; }
+    if (!this.oauthReceiver) {
+      this.oauthReceiver = 'oauth-receiver.html';
+    }
+    if (!this.updateRoute || !'true, false,'.includes(`${this.updateRoute},`)) {
+      this.updateRoute = 'true';
+    }
+    if (!this.routePrefix) {
+      this.routePrefix = '#';
+    }
+    if (!this.sortTags || !'true, false,'.includes(`${this.sortTags},`)) {
+      this.sortTags = 'false';
+    }
+    if (!this.generateMissingTags || !'true, false,'.includes(`${this.generateMissingTags},`)) {
+      this.generateMissingTags = 'false';
+    }
+    if (!this.sortEndpointsBy || !'method, path, summary, none,'.includes(`${this.sortEndpointsBy},`)) {
+      this.sortEndpointsBy = 'path';
+    }
+    if (!this.navItemSpacing || !'compact, relaxed, default,'.includes(`${this.navItemSpacing},`)) {
+      this.navItemSpacing = 'default';
+    }
+    if (!this.showMethodInNavBar || !'false, as-plain-text, as-colored-text, as-colored-block,'.includes(`${this.showMethodInNavBar},`)) {
+      this.showMethodInNavBar = 'false';
+    }
+    if (!this.usePathInNavBar || !'true, false,'.includes(`${this.usePathInNavBar},`)) {
+      this.usePathInNavBar = 'false';
+    }
+    if (!this.fontSize || !'default, large, largest,'.includes(`${this.fontSize},`)) {
+      this.fontSize = 'default';
+    }
 
-    if (!this.showInfo || !'true, false,'.includes(`${this.showInfo},`)) { this.showInfo = 'true'; }
-    if (!this.allowServerSelection || !'true, false,'.includes(`${this.allowServerSelection},`)) { this.allowServerSelection = 'true'; }
-    if (!this.allowAuthentication || !'true, false,'.includes(`${this.allowAuthentication},`)) { this.allowAuthentication = 'true'; }
-    if (!this.allowSchemaDescriptionExpandToggle || !'true, false,'.includes(`${this.allowSchemaDescriptionExpandToggle},`)) { this.allowSchemaDescriptionExpandToggle = 'true'; }
+    if (!this.showInfo || !'true, false,'.includes(`${this.showInfo},`)) {
+      this.showInfo = 'true';
+    }
+    if (!this.allowServerSelection || !'true, false,'.includes(`${this.allowServerSelection},`)) {
+      this.allowServerSelection = 'true';
+    }
+    if (!this.allowAuthentication || !'true, false,'.includes(`${this.allowAuthentication},`)) {
+      this.allowAuthentication = 'true';
+    }
+    if (!this.allowSchemaDescriptionExpandToggle || !'true, false,'.includes(`${this.allowSchemaDescriptionExpandToggle},`)) {
+      this.allowSchemaDescriptionExpandToggle = 'true';
+    }
 
-    if (!this.showSideNav || !'true false'.includes(this.showSideNav)) { this.showSideNav = 'true'; }
-    if (!this.showComponents || !'true false'.includes(this.showComponents)) { this.showComponents = 'false'; }
-    if (!this.infoDescriptionHeadingsInNavBar || !'true, false,'.includes(`${this.infoDescriptionHeadingsInNavBar},`)) { this.infoDescriptionHeadingsInNavBar = 'false'; }
-    if (!this.fetchCredentials || !'omit, same-origin, include,'.includes(`${this.fetchCredentials},`)) { this.fetchCredentials = ''; }
-    if (!this.matchType || !'includes regex'.includes(this.matchType)) { this.matchType = 'includes'; }
+    if (!this.showSideNav || !'true false'.includes(this.showSideNav)) {
+      this.showSideNav = 'true';
+    }
+    if (!this.showComponents || !'true false'.includes(this.showComponents)) {
+      this.showComponents = 'false';
+    }
+    if (!this.infoDescriptionHeadingsInNavBar || !'true, false,'.includes(`${this.infoDescriptionHeadingsInNavBar},`)) {
+      this.infoDescriptionHeadingsInNavBar = 'false';
+    }
+    if (!this.fetchCredentials || !'omit, same-origin, include,'.includes(`${this.fetchCredentials},`)) {
+      this.fetchCredentials = '';
+    }
+    if (!this.matchType || !'includes regex'.includes(this.matchType)) {
+      this.matchType = 'includes';
+    }
 
-    if (!this.showAdvancedSearchDialog) { this.showAdvancedSearchDialog = false; }
+    if (!this.showAdvancedSearchDialog) {
+      this.showAdvancedSearchDialog = false;
+    }
 
-    if (!this.cssFile) { this.cssFile = null; }
-    if (!this.cssClasses) { this.cssClasses = ''; }
+    if (!this.cssFile) {
+      this.cssFile = null;
+    }
+    if (!this.cssClasses) {
+      this.cssClasses = '';
+    }
 
     marked.setOptions({
       highlight: (code, lang) => {
@@ -652,7 +931,8 @@ export default class RapiDoc extends LitElement {
   }
 
   onFileLoadClick() {
-    this.shadowRoot.getElementById('spec-file').click();
+    this.shadowRoot.getElementById('spec-file')
+      .click();
   }
 
   onSearchChange(e) {
@@ -752,7 +1032,7 @@ export default class RapiDoc extends LitElement {
     }
     this.requestUpdate();
     // eslint-disable-next-line no-await-in-loop
-    while (!await this.updateComplete);
+    while (!await this.updateComplete) ;
     const specLoadedEvent = new CustomEvent('spec-loaded', { detail: spec });
     this.dispatchEvent(specLoadedEvent);
 
@@ -810,7 +1090,10 @@ export default class RapiDoc extends LitElement {
       window.setTimeout(() => {
         const gotoEl = this.shadowRoot.getElementById(tmpElementId);
         if (gotoEl) {
-          gotoEl.scrollIntoView({ behavior: 'auto', block: 'start' });
+          gotoEl.scrollIntoView({
+            behavior: 'auto',
+            block: 'start'
+          });
           if (this.updateRoute === 'true') {
             window.history.replaceState(null, null, `${this.routePrefix || '#'}${tmpElementId}`);
           }
@@ -853,7 +1136,10 @@ export default class RapiDoc extends LitElement {
           if (this.updateRoute === 'true') {
             window.history.replaceState(null, null, `${window.location.href.split('#')[0]}${this.routePrefix || '#'}${entry.target.id}`);
           }
-          newNavEl.scrollIntoView({ behavior: 'auto', block: 'center' });
+          newNavEl.scrollIntoView({
+            behavior: 'auto',
+            block: 'center'
+          });
           newNavEl.classList.add('active');
         }
         // Remove active class from previous element
@@ -867,10 +1153,15 @@ export default class RapiDoc extends LitElement {
   // Called by anchor tags created using markdown
   handleHref(e) {
     if (e.target.tagName.toLowerCase() === 'a') {
-      if (e.target.getAttribute('href').startsWith('#')) {
-        const gotoEl = this.shadowRoot.getElementById(e.target.getAttribute('href').replace('#', ''));
+      if (e.target.getAttribute('href')
+        .startsWith('#')) {
+        const gotoEl = this.shadowRoot.getElementById(e.target.getAttribute('href')
+          .replace('#', ''));
         if (gotoEl) {
-          gotoEl.scrollIntoView({ behavior: 'auto', block: 'start' });
+          gotoEl.scrollIntoView({
+            behavior: 'auto',
+            block: 'start'
+          });
         }
       }
     }
@@ -886,7 +1177,7 @@ export default class RapiDoc extends LitElement {
    *  2. Scroll to the element
    *  3. Activate IntersectionObserver (after little delay)
    *
-  */
+   */
   async scrollToEventTarget(event, scrollNavItemToView = true) {
     const navEl = event.currentTarget;
     if (!navEl.dataset.contentId) {
@@ -914,7 +1205,10 @@ export default class RapiDoc extends LitElement {
       const contentEl = this.shadowRoot.getElementById(elementId);
       if (contentEl) {
         isValidElementId = true;
-        contentEl.scrollIntoView({ behavior: 'auto', block: 'start' });
+        contentEl.scrollIntoView({
+          behavior: 'auto',
+          block: 'start'
+        });
       } else {
         isValidElementId = false;
       }
@@ -941,7 +1235,10 @@ export default class RapiDoc extends LitElement {
 
         if (newNavEl) {
           if (scrollNavItemToView) {
-            newNavEl.scrollIntoView({ behavior: 'auto', block: 'center' });
+            newNavEl.scrollIntoView({
+              behavior: 'auto',
+              block: 'center'
+            });
           }
           await sleep(0);
           const oldNavEl = this.shadowRoot.querySelector('.nav-bar-tag.active, .nav-bar-path.active, .nav-bar-info.active, .nav-bar-h1.active, .nav-bar-h2.active, .operations.active');
@@ -985,9 +1282,11 @@ export default class RapiDoc extends LitElement {
       if (eventTargetEl.type === 'text') {
         searchInputEl = eventTargetEl;
       } else {
-        searchInputEl = eventTargetEl.closest('.advanced-search-options').querySelector('input[type=text]');
+        searchInputEl = eventTargetEl.closest('.advanced-search-options')
+          .querySelector('input[type=text]');
       }
-      const searcOptions = [...eventTargetEl.closest('.advanced-search-options').querySelectorAll('input:checked')].map((v) => v.id);
+      const searcOptions = [...eventTargetEl.closest('.advanced-search-options')
+        .querySelectorAll('input:checked')].map((v) => v.id);
       this.advancedSearchMatches = advancedSearch(searchInputEl.value, this.resolvedSpec.tags, searcOptions);
     }, delay);
   }
